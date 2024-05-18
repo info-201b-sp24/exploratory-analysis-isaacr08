@@ -132,17 +132,17 @@ This detailed analysis identifies the most impactful players in clutch situation
 ### Chart 1
 
 ``````{r, echo = FALSE, code = readLines("Chart1.R")}
-```
+
 I chose to generate a bar chart with error bars to illustrate the average turnovers in clutch time for each NBA team alongside their standard deviations. This chart effectively communicates both the average turnover rates and the variability within each team, allowing for quick comparisons between teams and insight into the consistency of performance. The height of each bar indicates the average number of turnovers per team, while the error bars represent the standard deviation, showing the spread or consistency of turnover rates among players within each team. By examining the chart, viewers can easily identify teams with higher or lower turnover rates during crucial moments of the game and assess the stability of performance within each team.
 
 ### Chart 2
 
 ``````{r, echo = FALSE, code = readLines("Chart2.R")}
-```
+
 I opted to construct a scatter plot depicting the relationship between the defensive metric and the field goal percentage during clutch time for the top 20 players with the highest defensive metrics. This visualization effectively communicates both the defensive performance and its impact on opponents' shooting efficiency. Each point on the scatter plot represents a player, with their defensive metric plotted on the x-axis and their field goal percentage on the y-axis. By examining the chart, viewers can discern trends or patterns in defensive effectiveness and its correlation with opponents' field goal percentages. This visualization offers valuable insights into the defensive prowess of the top players during critical moments of the game and sheds light on their impact on opponent scoring efficiency.
 
 ### Chart 3
 
 ``````{r, echo = FALSE, code = readLines("Chart3.R")}
-```
+
 I chose to generate a bar chart with error bars to illustrate the average points scored per game in clutch time by each NBA team along with their standard deviations. This chart effectively communicates both the average scoring performance and the variability within each team's scoring during crucial moments of the game. Each bar represents the average points scored per game by a team, while the error bars indicate the standard deviation, showing the spread or consistency of scoring performance among players within each team. By examining the chart, viewers can easily identify teams with higher or lower average scoring rates during clutch situations and assess the stability of scoring performance within each team.
