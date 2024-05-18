@@ -131,18 +131,120 @@ This detailed analysis identifies the most impactful players in clutch situation
 
 ### Chart 1
 
-``````{r, echo = FALSE, code = readLines("Chart1.R")}
+```r
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load the CSV data
+file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
+clutch_data <- read_csv(file_url)
+
+# Calculate weighted statistics based on minutes played
+clutch_data <- clutch_data %>%
+  mutate(weighted_tov = TOV * MIN / GP)
+
+# Filter data based on minimum minutes and games played
+clutch_data <- clutch_data %>%
+  filter(MIN >= 1, GP >= 3)
+
+# Group data by team and calculate mean and standard deviation of turnovers
+turnover_stats <- clutch_data %>%
+  group_by(TEAM_ABBREVIATION) %>%
+  summarise(avg_weighted_tov = mean(weighted_tov, na.rm = TRUE),
+            sd_weighted_tov = sd(weighted_tov, na.rm = TRUE))
+
+# Create bar chart with standard deviation
+ggplot(turnover_stats, aes(x = TEAM_ABBREVIATION, y = avg_weighted_tov, fill = TEAM_ABBREVIATION)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = avg_weighted_tov - sd_weighted_tov, ymax = avg_weighted_tov + sd_weighted_tov), width = 0.8, position = position_dodge(0.9)) +
+  labs(title = "Average Turnovers in Clutch Time",
+       x = "Team Abbreviation",
+       y = "Average Turnovers") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
 
 I chose to generate a bar chart with error bars to illustrate the average turnovers in clutch time for each NBA team alongside their standard deviations. This chart effectively communicates both the average turnover rates and the variability within each team, allowing for quick comparisons between teams and insight into the consistency of performance. The height of each bar indicates the average number of turnovers per team, while the error bars represent the standard deviation, showing the spread or consistency of turnover rates among players within each team. By examining the chart, viewers can easily identify teams with higher or lower turnover rates during crucial moments of the game and assess the stability of performance within each team.
 
 ### Chart 2
 
-``````{r, echo = FALSE, code = readLines("Chart2.R")}
+```r
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load the CSV data
+file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
+clutch_data <- read_csv(file_url)
+
+# Filter data based on minimum minutes and games played
+clutch_data_filtered <- clutch_data %>%
+  filter(MIN >= 1, GP >= 3)
+
+# Calculate total minutes played for each player
+clutch_data_filtered <- clutch_data_filtered %>%
+  mutate(total_minutes = MIN * GP)
+
+# Calculate weighted defensive metric
+clutch_data_defensive <- clutch_data_filtered %>%
+  mutate(defensive_metric = (STL + BLK) / total_minutes)
+
+# Select top 20 players with highest defensive metric
+top_20_defensive_players <- clutch_data_defensive %>%
+  group_by(PLAYER_NAME) %>%
+  summarise(total_defensive_metric = sum(defensive_metric, na.rm = TRUE)) %>%
+  top_n(20, wt = total_defensive_metric)
+
+# Merge top 20 players with original clutch data
+clutch_data_top_20_defensive <- inner_join(clutch_data_defensive, top_20_defensive_players, by = "PLAYER_NAME")
+
+# Create scatter plot of defensive metric vs FG_PCT for top 20 players
+ggplot(clutch_data_top_20_defensive, aes(x = defensive_metric, y = FG_PCT, color = PLAYER_NAME)) +
+  geom_point() +
+  labs(title = "Defensive Metric vs Field Goal Percentage in Clutch Time (Top 20 Players by Defensive Metric)",
+       x = "Defensive Metric",
+       y = "Field Goal Percentage") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
 
 I opted to construct a scatter plot depicting the relationship between the defensive metric and the field goal percentage during clutch time for the top 20 players with the highest defensive metrics. This visualization effectively communicates both the defensive performance and its impact on opponents' shooting efficiency. Each point on the scatter plot represents a player, with their defensive metric plotted on the x-axis and their field goal percentage on the y-axis. By examining the chart, viewers can discern trends or patterns in defensive effectiveness and its correlation with opponents' field goal percentages. This visualization offers valuable insights into the defensive prowess of the top players during critical moments of the game and sheds light on their impact on opponent scoring efficiency.
 
 ### Chart 3
 
-``````{r, echo = FALSE, code = readLines("Chart3.R")}
+```r
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load the CSV data
+file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
+clutch_data <- read_csv(file_url)
+
+# Filter data based on minimum minutes and games played
+clutch_data <- clutch_data %>%
+  filter(MIN >= 1, GP >= 3)
+
+# Group data by team and calculate average points scored per game and standard deviation
+points_stats <- clutch_data %>%
+  group_by(TEAM_ABBREVIATION) %>%
+  summarise(avg_points = mean(PTS, na.rm = TRUE),
+            sd_points = sd(PTS, na.rm = TRUE))
+
+# Create bar chart of average points scored per game with error bars for standard deviation
+ggplot(points_stats, aes(x = reorder(TEAM_ABBREVIATION, -avg_points), y = avg_points, fill = TEAM_ABBREVIATION)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = avg_points - sd_points, ymax = avg_points + sd_points), width = 0.2, position = position_dodge(0.9)) +
+  labs(title = "Average Points Scored per Game in Clutch Time by Team",
+       x = "Team Abbreviation",
+       y = "Average Points Scored") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")
+```
 
 I chose to generate a bar chart with error bars to illustrate the average points scored per game in clutch time by each NBA team along with their standard deviations. This chart effectively communicates both the average scoring performance and the variability within each team's scoring during crucial moments of the game. Each bar represents the average points scored per game by a team, while the error bars indicate the standard deviation, showing the spread or consistency of scoring performance among players within each team. By examining the chart, viewers can easily identify teams with higher or lower average scoring rates during clutch situations and assess the stability of scoring performance within each team.
