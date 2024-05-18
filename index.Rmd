@@ -155,7 +155,7 @@ clutch performance difficulty, and interpretation challenges, NBA clutch
 shooting research may improve.
 
 ### Summary Information
-
+```{r, echo = FALSE, message = FALSE}
 # Load necessary libraries
 library(ggplot2)
 library(dplyr)
@@ -209,7 +209,7 @@ top_20_players <- player_stats %>%
 top_20_players <- top_20_players %>%
   select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
 
-
+```
 
 Our analysis of the clutch performance data from the 2020-21 NBA season
 offers valuable insights into player performance during critical moments of
@@ -243,6 +243,8 @@ pressure.
 
 
 ### Table
+
+```{r, echo = FALSE, message = FALSE}
 # Load necessary libraries
 library(ggplot2)
 library(dplyr)
@@ -298,7 +300,7 @@ top_20_players <- top_20_players %>%
 
 # Print the top 20 players
 print(top_20_players)
-
+```
 This detailed analysis identifies the most impactful players in clutch
 situations, offering valuable insights into their performance under pressure.
 By focusing on weighted statistics, we can better understand which players
@@ -410,7 +412,7 @@ light on their impact on opponent scoring efficiency.
 
 ### Chart 3
 
-```r
+```{r, echo = FALSE, message = FALSE}
 # Load necessary libraries
 library(ggplot2)
 library(dplyr)
