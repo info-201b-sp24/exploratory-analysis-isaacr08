@@ -17,7 +17,13 @@ Spring 2024
 
 ### Abstract
 
-Our project explores the concept of clutch shooting in the NBA, analyzing the performance of players in high-pressure situations. This question is important because it can provide insights into the mental and physical preparation required for success in critical game moments. To address this question, we will examine the relationship between clutch shooting percentages and other factors such as game experience, shot difficulty, and player consistency.
+Our project explores the concept of clutch shooting in the NBA, analyzing the
+performance of players in high-pressure situations. This question is
+important because it can provide insights into the mental and physical
+preparation required for success in critical game moments. To address this
+question, we will examine the relationship between clutch shooting
+percentages and other factors such as game experience, shot difficulty, and
+player consistency.
 
 ### Keywords
 
@@ -25,39 +31,161 @@ NBA, Clutch Shooting, Basketball Analytics, Free throw, shot difficulty
 
 ### Introduction  
 
-The capacity to perform well under pressure is a highly valued quality in sports. This is also called clutching. Additionally, clutch shooting is the ability to make important shots at game-changing moments. Many shots have transformed many NBA and WNBA games, series, and seasons. This research examines 1996-97 NBA clutch shooting statistics. Physical skill, mental fortitude, and situational awareness are needed for clutch shooting. Players with clutch genes can focus, adapt, and shoot accurately and confidently. The importance of clutch shooting cannot be overstated, as it can swing the momentum of a game and ultimately decide the outcome. Below are the Research questions: How do clutch shooting percentages vary by game experience? How much of an effect does shot difficulty relate to the outcomes of clutch shooting percentages? Do clutch shooters repeat this ability to make clutch shots consistently? These questions may show mental and physical preparedness for high-pressure success. Patterns and trends in the data may affect coaching and player development. Clubs may offer veteran players additional opportunities at important times if they perform well. If clutch shooting and shot difficulty are associated, athletes who can make tough shots under pressure may thrive. We hope to highlight clutch shooting's complex mechanics and basketball impact by addressing these questions.
+The capacity to perform well under pressure is a highly valued quality in
+sports. This is also called clutching. Additionally, clutch shooting is the
+ability to make important shots at game-changing moments. Many shots have
+transformed many NBA and WNBA games, series, and seasons. This research
+examines 1996-97 NBA clutch shooting statistics. Physical skill, mental
+fortitude, and situational awareness are needed for clutch shooting. Players
+with clutch genes can focus, adapt, and shoot accurately and confidently. The
+importance of clutch shooting cannot be overstated, as it can swing the
+momentum of a game and ultimately decide the outcome. Below are the Research
+questions: How do clutch shooting percentages vary by game experience? How
+much of an effect does shot difficulty relate to the outcomes of clutch
+shooting percentages? Do clutch shooters repeat this ability to make clutch
+shots consistently? These questions may show mental and physical preparedness
+for high-pressure success. Patterns and trends in the data may affect
+coaching and player development. Clubs may offer veteran players additional
+opportunities at important times if they perform well. If clutch shooting and
+shot difficulty are associated, athletes who can make tough shots under
+pressure may thrive. We hope to highlight clutch shooting's complex mechanics
+and basketball impact by addressing these questions.
 
 ### Related Work  
 
-Numerous factors impact basketball players' clutch performance, which has been extensively studied. Considerations include teamwork, player experience, and game setting. In stressful situations, players who can stay cool and focused are more likely to succeed, according to research. Analytics like win probability and clutch scoring percentages have identified NBA clutch performers. Beyond points per game and shooting percentages, these measurements show a player's impact. Also studied are clutch shot mechanics and accuracy. Stephen Curry and other players with a longer shot arc are more accurate in crucial situations, according to research. This stresses technical skill in clutch performance and claims that players who can make challenging shots would perform better under pressure. WNBA clutch players like Arike Ogunbowale, Courtney Vandersloot, and Brittney Griner thrive under pressure. Their unique mix of physical skill, mental grit, and situational awareness helps them succeed in vital situations. Basketball clutch performance research illustrates how physical and emotional factors combine to influence success under pressure. Analyzing these factors and measuring clutch performance can help us understand what makes a player clutch and how teams should strategy to win key games. All of my insights from above are laid out in the references of relevant work below. References: https://gamerant.com/nba-2k22-best-wnba-player-each-position-rating-pg-sg-sf-pf-c/ https://en.wikipedia.org/wiki/Alysha_Clark https://www.inpredictable.com/p/about-this-site.html?m=1 https://www.nba.com/news/stats-leaders-who-are-top-clutch-scorers-this-season https://www.inpredictable.com/2015/05/introducing-sharc-shot-arc-analysis.html?m=1
+Numerous factors impact basketball players' clutch performance, which has
+been extensively studied. Considerations include teamwork, player experience,
+and game setting. In stressful situations, players who can stay cool and
+focused are more likely to succeed, according to research. Analytics like win
+probability and clutch scoring percentages have identified NBA clutch
+performers. Beyond points per game and shooting percentages, these
+measurements show a player's impact. Also studied are clutch shot mechanics
+and accuracy. Stephen Curry and other players with a longer shot arc are more
+accurate in crucial situations, according to research. This stresses
+technical skill in clutch performance and claims that players who can make
+challenging shots would perform better under pressure. WNBA clutch players
+like Arike Ogunbowale, Courtney Vandersloot, and Brittney Griner thrive under
+pressure. Their unique mix of physical skill, mental grit, and situational
+awareness helps them succeed in vital situations. Basketball clutch
+performance research illustrates how physical and emotional factors combine
+to influence success under pressure. Analyzing these factors and measuring
+clutch performance can help us understand what makes a player clutch and how
+teams should strategy to win key games. All of my insights from above are
+laid out in the references of relevant work below. References: https://
+gamerant.com/nba-2k22-best-wnba-player-each-position-rating-pg-sg-sf-pf-c/
+https://en.wikipedia.org/wiki/Alysha_Clark https://www.inpredictable.com/p/
+about-this-site.html?m=1 https://www.nba.com/news/stats-leaders-who-are-top-
+clutch-scorers-this-season https://www.inpredictable.com/2015/05/introducing-
+sharc-shot-arc-analysis.html?m=1
 
 ### The Dataset
 
-The Dataset The nba.csv file includes all NBA clutch shot takers since 1996-97. Data from a list of prominent clutch shots (~64,000) contains player IDs, names, clutch free throw attempts, total clutch shots, clutch shooting percentages, and more. Data Source The data was gathered and given by inpredictable, a company that provides insights on many sports, including basketball. Data Gathering Data was acquired manually using basketballreference.com, assuring correctness and dependability. Data on point difference at the 5-minute mark, when clutch time begins, was manually collected using basketballreference.com. The data also contains manually gathered statistics like minutes played, field goals attempted, and free throws taken up until clutch time. Data Collection Goal The study examined clutchness in basketball, specifically late-game free throw shooting in playoffs and the impact of point disparity. Features of the dataset The dataset has 200 observations (players) and 9 characteristics (columns), making it acceptable for analysis. Combining basic data like rebounds with sophisticated metrics like pace or use rate enables a comprehensive analysis of crucial performance. Moral Issues Consider ethical problems and power dynamics when handling this data, such as possible bias in data collecting and processing, and the effect of results on players and teams. The dataset's concentration on clutch time free throw % as the dependent variable may overemphasize one element of clutch performance, omitting other crucial aspects
+The Dataset The nba.csv file includes all NBA clutch shot takers since 1996-
+97. Data from a list of prominent clutch shots (~64,000) contains player IDs,
+names, clutch free throw attempts, total clutch shots, clutch shooting
+percentages, and more. Data Source The data was gathered and given by
+inpredictable, a company that provides insights on many sports, including
+basketball. Data Gathering Data was acquired manually using
+basketballreference.com, assuring correctness and dependability. Data on
+point difference at the 5-minute mark, when clutch time begins, was manually
+collected using basketballreference.com. The data also contains manually
+gathered statistics like minutes played, field goals attempted, and free
+throws taken up until clutch time. Data Collection Goal The study examined
+clutchness in basketball, specifically late-game free throw shooting in
+playoffs and the impact of point disparity. Features of the dataset The
+dataset has 200 observations (players) and 9 characteristics (columns),
+making it acceptable for analysis. Combining basic data like rebounds with
+sophisticated metrics like pace or use rate enables a comprehensive analysis
+of crucial performance. Moral Issues Consider ethical problems and power
+dynamics when handling this data, such as possible bias in data collecting
+and processing, and the effect of results on players and teams. The dataset's
+concentration on clutch time free throw % as the dependent variable may
+overemphasize one element of clutch performance, omitting other crucial
+aspects
 
 ### Implications
 
-There are many implications that could be affected by my analysis of players that are clutch. For example, Identifying clutch shooting performance markers aids GM team-building decisions. To make the optimal decisions as a gm you need to recruit high-pressure players, developing clutch shooting training programs, and advising on game strategy and player selection. To clarify, a general manager recruits and signs the top players. Players that perform well under pressure are essential to winning late in the games. Data may help GMs evaluate player clutch characteristics and make informed roster changes. This may include signing clutch shooters or free agents with the skills and perseverance to succeed under pressure. This study may affect GM contract talks and player evaluations. Understanding clutch shooting's importance may help GMs negotiate contracts and evaluate players. Teams who can attract key clutch players may have a superior roster and competitive advantage. The NBA and WNBA may adjust team construction and administration according to the findings of my analysis.
+There are many implications that could be affected by my analysis of players
+that are clutch. For example, Identifying clutch shooting performance markers
+aids GM team-building decisions. To make the optimal decisions as a gm you
+need to recruit high-pressure players, developing clutch shooting training
+programs, and advising on game strategy and player selection. To clarify, a
+general manager recruits and signs the top players. Players that perform well
+under pressure are essential to winning late in the games. Data may help GMs
+evaluate player clutch characteristics and make informed roster changes. This
+may include signing clutch shooters or free agents with the skills and
+perseverance to succeed under pressure. This study may affect GM contract
+talks and player evaluations. Understanding clutch shooting's importance may
+help GMs negotiate contracts and evaluate players. Teams who can attract key
+clutch players may have a superior roster and competitive advantage. The NBA
+and WNBA may adjust team construction and administration according to the
+findings of my analysis.
 
 ### Limitations & Challenges
-The findings of "Shooting for Glory: A Data-Driven Exploration of Clutch Performance in the NBA," must overcome numerous challenges to be reliable. Three important concerns need significant consideration. First Challenge: Data Limits Although vast, the dataset may not capture all clutch shooting instances. It emphasizes playoff late-game free throw shooting, which may not reflect other crucial moments. The dataset may not contain important regular-season or non-playoff shots. This restricted view may not explain clutch performance since players act differently in different games. Shot selection, defense, and collaboration may be overlooked in the dataset's crunch time free throw % concentration. No one statistic can measure clutch performance. The study solely examined free throw %, which may have missed clutch shooting nuances. Problem 2: Methodology To compare clutch shooting percentages to other criteria, use statistical models. These models may not accurately represent clutch performance due to team chemistry, coaching, and player psychology. Clutch performance may rely on teammates, coach, and mental preparation. Intangibles may lead statistical models to oversimplify variable relationships. Statistical models may overemphasize quantitative measures, concealing qualitative findings. Intangible traits that set great athletes apart also impact clutch success. Over-statistical modeling may impede clutch performance studies from comprehending humans. 3. Interpretation Issues This study is interpretable, and "clutch" is subjective. What is a clutch situation, and how do we account for player anxiety in various games? Are playoff game-tying shots more crucial than regular-season game-winning shots? Compare clutch performances from different times, teams, and systems. Data collection and analysis biases may impact research results. Data from playoff games may overrepresent postseason performers, biasing clutch performance. The study must consider these biases and interpret findings nuancedly. Addressing these issues will assure the findings' reliability and provide NBA organizations and players useful data. By acknowledging dataset restrictions, clutch performance difficulty, and interpretation challenges, NBA clutch shooting research may improve.
+The findings of "Shooting for Glory: A Data-Driven Exploration of Clutch
+Performance in the NBA," must overcome numerous challenges to be reliable.
+Three important concerns need significant consideration. First Challenge:
+Data Limits Although vast, the dataset may not capture all clutch shooting
+instances. It emphasizes playoff late-game free throw shooting, which may not
+reflect other crucial moments. The dataset may not contain important regular-
+season or non-playoff shots. This restricted view may not explain clutch
+performance since players act differently in different games. Shot selection,
+defense, and collaboration may be overlooked in the dataset's crunch time
+free throw % concentration. No one statistic can measure clutch performance.
+The study solely examined free throw %, which may have missed clutch shooting
+nuances. Problem 2: Methodology To compare clutch shooting percentages to
+other criteria, use statistical models. These models may not accurately
+represent clutch performance due to team chemistry, coaching, and player
+psychology. Clutch performance may rely on teammates, coach, and mental
+preparation. Intangibles may lead statistical models to oversimplify variable
+relationships. Statistical models may overemphasize quantitative measures,
+concealing qualitative findings. Intangible traits that set great athletes
+apart also impact clutch success. Over-statistical modeling may impede clutch
+performance studies from comprehending humans. 3. Interpretation Issues This
+study is interpretable, and "clutch" is subjective. What is a clutch
+situation, and how do we account for player anxiety in various games? Are
+playoff game-tying shots more crucial than regular-season game-winning shots?
+Compare clutch performances from different times, teams, and systems. Data
+collection and analysis biases may impact research results. Data from playoff
+games may overrepresent postseason performers, biasing clutch performance.
+The study must consider these biases and interpret findings nuancedly.
+Addressing these issues will assure the findings' reliability and provide NBA
+organizations and players useful data. By acknowledging dataset restrictions,
+clutch performance difficulty, and interpretation challenges, NBA clutch
+shooting research may improve.
 
 ### Summary Information
 
 
-Our analysis of the clutch performance data from the 2020-21 NBA season offers valuable insights into player performance during critical moments of the game. We focused on key statistics, weighted by minutes played.
+Our analysis of the clutch performance data from the 2020-21 NBA season
+offers valuable insights into player performance during critical moments of
+the game. We focused on key statistics, weighted by minutes played.
 
-In turnovers (TOV), LeBron James had the highest weighted total of 0.148, followed by James Harden and Kevin Durant. Turnovers indicate negative output; thus, teams would want to avoid players who frequently turn the ball over in clutch moments.
+In turnovers (TOV), LeBron James had the highest weighted total of 0.148,
+followed by James Harden and Kevin Durant. Turnovers indicate negative
+output; thus, teams would want to avoid players who frequently turn the ball
+over in clutch moments.
 
-For assists (AST), LeBron James again led with a weighted total of 0.198, with Jamal Murray and James Harden close behind. This highlights LeBron's ability to facilitate plays under pressure.
+For assists (AST), LeBron James again led with a weighted total of 0.198,
+with Jamal Murray and James Harden close behind. This highlights LeBron's
+ability to facilitate plays under pressure.
 
-In steals (STL), Collin Sexton topped the list with 0.06, followed by LeBron James and Will Barton. Steals are crucial for defensive prowess in clutch situations, showing a player's ability to disrupt opponents.
+In steals (STL), Collin Sexton topped the list with 0.06, followed by LeBron
+James and Will Barton. Steals are crucial for defensive prowess in clutch
+situations, showing a player's ability to disrupt opponents.
 
-Jamal Murray had the highest average weighted free throw percentage (FT_PCT) at 0.263, with Will Barton and Derrick White also performing well. This indicates these players' reliability in scoring from free throws during crucial moments.
+Jamal Murray had the highest average weighted free throw percentage (FT_PCT)
+at 0.263, with Will Barton and Derrick White also performing well. This
+indicates these players' reliability in scoring from free throws during
+crucial moments.
 
-Anthony Davis led in weighted blocks (BLK) with 0.0844, followed by Joel Embiid and Robert Williams. Blocks are vital for defensive stances in clutch times, highlighting these players' ability to protect the rim.
+Anthony Davis led in weighted blocks (BLK) with 0.0844, followed by Joel
+Embiid and Robert Williams. Blocks are vital for defensive stances in clutch
+times, highlighting these players' ability to protect the rim.
 
-This detailed analysis identifies the most impactful players in clutch situations, providing valuable insights into player performance under pressure.
+This detailed analysis identifies the most impactful players in clutch
+situations, providing valuable insights into player performance under
+pressure.
 
 
 ### Table
@@ -127,7 +255,10 @@ PLAYER_NAME         total_weighted_blk
 9 Bam Adebayo                     0.0362
 10 Deandre Ayton                   0.0343
 
-This detailed analysis identifies the most impactful players in clutch situations, offering valuable insights into their performance under pressure. By focusing on weighted statistics, we can better understand which players excel in critical moments and which areas require improvement.
+This detailed analysis identifies the most impactful players in clutch
+situations, offering valuable insights into their performance under pressure.
+By focusing on weighted statistics, we can better understand which players
+excel in critical moments and which areas require improvement.
 
 ### Chart 1
 
@@ -166,7 +297,17 @@ ggplot(turnover_stats, aes(x = TEAM_ABBREVIATION, y = avg_weighted_tov, fill = T
   theme(legend.position = "none")
 ```
 
-I chose to generate a bar chart with error bars to illustrate the average turnovers in clutch time for each NBA team alongside their standard deviations. This chart effectively communicates both the average turnover rates and the variability within each team, allowing for quick comparisons between teams and insight into the consistency of performance. The height of each bar indicates the average number of turnovers per team, while the error bars represent the standard deviation, showing the spread or consistency of turnover rates among players within each team. By examining the chart, viewers can easily identify teams with higher or lower turnover rates during crucial moments of the game and assess the stability of performance within each team.
+I chose to generate a bar chart with error bars to illustrate the average
+turnovers in clutch time for each NBA team alongside their standard
+deviations. This chart effectively communicates both the average turnover
+rates and the variability within each team, allowing for quick comparisons
+between teams and insight into the consistency of performance. The height of
+each bar indicates the average number of turnovers per team, while the error
+bars represent the standard deviation, showing the spread or consistency of
+turnover rates among players within each team. By examining the chart,
+viewers can easily identify teams with higher or lower turnover rates during
+crucial moments of the game and assess the stability of performance within
+each team.
 
 ### Chart 2
 
@@ -211,7 +352,17 @@ ggplot(clutch_data_top_20_defensive, aes(x = defensive_metric, y = FG_PCT, color
   theme(legend.position = "bottom")
 ```
 
-I opted to construct a scatter plot depicting the relationship between the defensive metric and the field goal percentage during clutch time for the top 20 players with the highest defensive metrics. This visualization effectively communicates both the defensive performance and its impact on opponents' shooting efficiency. Each point on the scatter plot represents a player, with their defensive metric plotted on the x-axis and their field goal percentage on the y-axis. By examining the chart, viewers can discern trends or patterns in defensive effectiveness and its correlation with opponents' field goal percentages. This visualization offers valuable insights into the defensive prowess of the top players during critical moments of the game and sheds light on their impact on opponent scoring efficiency.
+I opted to construct a scatter plot depicting the relationship between the
+defensive metric and the field goal percentage during clutch time for the top
+20 players with the highest defensive metrics. This visualization effectively
+communicates both the defensive performance and its impact on opponents'
+shooting efficiency. Each point on the scatter plot represents a player, with
+their defensive metric plotted on the x-axis and their field goal percentage
+on the y-axis. By examining the chart, viewers can discern trends or patterns
+in defensive effectiveness and its correlation with opponents' field goal
+percentages. This visualization offers valuable insights into the defensive
+prowess of the top players during critical moments of the game and sheds
+light on their impact on opponent scoring efficiency.
 
 ### Chart 3
 
@@ -247,4 +398,13 @@ ggplot(points_stats, aes(x = reorder(TEAM_ABBREVIATION, -avg_points), y = avg_po
         legend.position = "none")
 ```
 
-I chose to generate a bar chart with error bars to illustrate the average points scored per game in clutch time by each NBA team along with their standard deviations. This chart effectively communicates both the average scoring performance and the variability within each team's scoring during crucial moments of the game. Each bar represents the average points scored per game by a team, while the error bars indicate the standard deviation, showing the spread or consistency of scoring performance among players within each team. By examining the chart, viewers can easily identify teams with higher or lower average scoring rates during clutch situations and assess the stability of scoring performance within each team.
+I chose to generate a bar chart with error bars to illustrate the average
+points scored per game in clutch time by each NBA team along with their
+standard deviations. This chart effectively communicates both the average
+scoring performance and the variability within each team's scoring during
+crucial moments of the game. Each bar represents the average points scored
+per game by a team, while the error bars indicate the standard deviation,
+showing the spread or consistency of scoring performance among players within
+each team. By examining the chart, viewers can easily identify teams with
+higher or lower average scoring rates during clutch situations and assess the
+stability of scoring performance within each team.
