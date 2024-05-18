@@ -44,33 +44,105 @@ The findings of "Shooting for Glory: A Data-Driven Exploration of Clutch Perform
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+
+Our analysis of the clutch performance data from the 2020-21 NBA season offers valuable insights into player performance during critical moments of the game. We focused on key statistics, weighted by minutes played.
+
+In turnovers (TOV), LeBron James had the highest weighted total of 0.148, followed by James Harden and Kevin Durant. Turnovers indicate negative output; thus, teams would want to avoid players who frequently turn the ball over in clutch moments.
+
+For assists (AST), LeBron James again led with a weighted total of 0.198, with Jamal Murray and James Harden close behind. This highlights LeBron's ability to facilitate plays under pressure.
+
+In steals (STL), Collin Sexton topped the list with 0.06, followed by LeBron James and Will Barton. Steals are crucial for defensive prowess in clutch situations, showing a player's ability to disrupt opponents.
+
+Jamal Murray had the highest average weighted free throw percentage (FT_PCT) at 0.263, with Will Barton and Derrick White also performing well. This indicates these players' reliability in scoring from free throws during crucial moments.
+
+Anthony Davis led in weighted blocks (BLK) with 0.0844, followed by Joel Embiid and Robert Williams. Blocks are vital for defensive stances in clutch times, highlighting these players' ability to protect the rim.
+
+This detailed analysis identifies the most impactful players in clutch situations, providing valuable insights into player performance under pressure.
+
 
 ### Table
 
-Include a table of aggregate information
+PLAYER_NAME             total_weighted_tov
+<chr>                                <dbl>
+1 LeBron James                        0.148
+2 James Harden                        0.0891
+3 Kevin Durant                        0.0844
+4 Nikola Jokic                        0.0758
+5 Khris Middleton                     0.075
+6 Darius Garland                      0.0733
+7 Shai Gilgeous-Alexander             0.068
+8 Russell Westbrook                   0.0629
+9 Collin Sexton                       0.06  
+10 Joel Embiid                         0.0592
 
-Describe why you included the table and what information it reveals
+PLAYER_NAME             total_weighted_ast
+<chr>                                <dbl>
+1 LeBron James                        0.198
+2 Jamal Murray                        0.158
+3 James Harden                        0.143
+4 Shai Gilgeous-Alexander             0.136
+5 Russell Westbrook                   0.126
+6 Nikola Jokic                        0.106
+7 Draymond Green                      0.106
+8 Trae Young                          0.0984
+9 Will Barton                         0.098
+10 Gordon Hayward                      0.093
+
+PLAYER_NAME       total_weighted_stl
+<chr>                          <dbl>
+1 Collin Sexton                 0.06  
+2 LeBron James                  0.0495
+3 Will Barton                   0.049
+4 Nikola Jokic                  0.0455
+5 Reggie Bullock                0.045
+6 LaMelo Ball                   0.04  
+7 Julius Randle                 0.0386
+8 Bogdan Bogdanovic             0.0379
+9 Andre Drummond                0.0368
+10 Draymond Green                0.0354
+
+PLAYER_NAME             avg_weighted_ft_pct
+<chr>                                 <dbl>
+1 Jamal Murray                          0.263
+2 Will Barton                           0.245
+3 Derrick White                         0.224
+4 Anthony Davis                         0.211
+5 Goran Dragic                          0.193
+6 Bogdan Bogdanovic                     0.189
+7 Kevin Durant                          0.182
+8 Shai Gilgeous-Alexander               0.181
+9 James Harden                          0.169
+10 Christian Wood                        0.167
+
+PLAYER_NAME         total_weighted_blk
+<chr>                            <dbl>
+1 Anthony Davis                   0.0844
+2 Joel Embiid                     0.0592
+3 Robert Williams III             0.0588
+4 Nerlens Noel                    0.0553
+5 Will Barton                     0.049
+6 Kevin Durant                    0.0422
+7 Myles Turner                    0.0375
+8 Andre Drummond                  0.0368
+9 Bam Adebayo                     0.0362
+10 Deandre Ayton                   0.0343
+
+This detailed analysis identifies the most impactful players in clutch situations, offering valuable insights into their performance under pressure. By focusing on weighted statistics, we can better understand which players excel in critical moments and which areas require improvement.
 
 ### Chart 1
 
-Include a chart
-
-Describe why you chose this chart and what information it reveals
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
+``````{r, echo = FALSE, code = readLines("Chart1.R")}
 ```
+I chose to generate a bar chart with error bars to illustrate the average turnovers in clutch time for each NBA team alongside their standard deviations. This chart effectively communicates both the average turnover rates and the variability within each team, allowing for quick comparisons between teams and insight into the consistency of performance. The height of each bar indicates the average number of turnovers per team, while the error bars represent the standard deviation, showing the spread or consistency of turnover rates among players within each team. By examining the chart, viewers can easily identify teams with higher or lower turnover rates during crucial moments of the game and assess the stability of performance within each team.
 
 ### Chart 2
 
-Include a chart
-
-Describe why you chose this chart and what information it reveals
+``````{r, echo = FALSE, code = readLines("Chart2.R")}
+```
+I opted to construct a scatter plot depicting the relationship between the defensive metric and the field goal percentage during clutch time for the top 20 players with the highest defensive metrics. This visualization effectively communicates both the defensive performance and its impact on opponents' shooting efficiency. Each point on the scatter plot represents a player, with their defensive metric plotted on the x-axis and their field goal percentage on the y-axis. By examining the chart, viewers can discern trends or patterns in defensive effectiveness and its correlation with opponents' field goal percentages. This visualization offers valuable insights into the defensive prowess of the top players during critical moments of the game and sheds light on their impact on opponent scoring efficiency.
 
 ### Chart 3
 
-Include a chart
-
-Describe why you chose this chart and what information it reveals
+``````{r, echo = FALSE, code = readLines("Chart3.R")}
+```
+I chose to generate a bar chart with error bars to illustrate the average points scored per game in clutch time by each NBA team along with their standard deviations. This chart effectively communicates both the average scoring performance and the variability within each team's scoring during crucial moments of the game. Each bar represents the average points scored per game by a team, while the error bars indicate the standard deviation, showing the spread or consistency of scoring performance among players within each team. By examining the chart, viewers can easily identify teams with higher or lower average scoring rates during clutch situations and assess the stability of scoring performance within each team.
