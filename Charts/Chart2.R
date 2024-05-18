@@ -36,3 +36,5 @@ ggplot(clutch_data_top_20_defensive, aes(x = defensive_metric, y = FG_PCT, color
        y = "Field Goal Percentage") +
   theme_minimal() +
   theme(legend.position = "bottom")
+
+ggsave(filename = "chart2.png", plot = p, width = 8, height = 6, dpi = 300)

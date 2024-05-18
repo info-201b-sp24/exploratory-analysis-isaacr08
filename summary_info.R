@@ -26,28 +26,30 @@ player_stats <- clutch_data %>%
             total_weighted_ast = sum(weighted_ast, na.rm = TRUE),
             total_weighted_stl = sum(weighted_stl, na.rm = TRUE),
             avg_weighted_ft_pct = mean(weighted_ft_pct, na.rm = TRUE),
-            total_weighted_blk = sum(weighted_blk, na.rm = TRUE)) %>%
-  arrange(desc(total_weighted_tov), desc(total_weighted_ast), desc(total_weighted_stl), desc(avg_weighted_ft_pct), desc(total_weighted_blk))
+            total_weighted_blk = sum(weighted_blk, na.rm = TRUE))
 
-# Select top ten players for each statistic
-top_ten_tov <- head(player_stats[order(-player_stats$total_weighted_tov), c("PLAYER_NAME", "total_weighted_tov")], 10)
-top_ten_ast <- head(player_stats[order(-player_stats$total_weighted_ast), c("PLAYER_NAME", "total_weighted_ast")], 10)
-top_ten_stl <- head(player_stats[order(-player_stats$total_weighted_stl), c("PLAYER_NAME", "total_weighted_stl")], 10)
-top_ten_ft_pct <- head(player_stats[order(-player_stats$avg_weighted_ft_pct), c("PLAYER_NAME", "avg_weighted_ft_pct")], 10)
-top_ten_blk <- head(player_stats[order(-player_stats$total_weighted_blk), c("PLAYER_NAME", "total_weighted_blk")], 10)
+# Normalize each statistic
+player_stats <- player_stats %>%
+  mutate(norm_weighted_tov = (total_weighted_tov - min(total_weighted_tov)) / (max(total_weighted_tov) - min(total_weighted_tov)),
+         norm_weighted_ast = (total_weighted_ast - min(total_weighted_ast)) / (max(total_weighted_ast) - min(total_weighted_ast)),
+         norm_weighted_stl = (total_weighted_stl - min(total_weighted_stl)) / (max(total_weighted_stl) - min(total_weighted_stl)),
+         norm_weighted_ft_pct = (avg_weighted_ft_pct - min(avg_weighted_ft_pct)) / (max(avg_weighted_ft_pct) - min(avg_weighted_ft_pct)),
+         norm_weighted_blk = (total_weighted_blk - min(total_weighted_blk)) / (max(total_weighted_blk) - min(total_weighted_blk)))
 
-# Print the top ten players for each statistic
-cat("Top 10 Players for Turnovers (TOV):\n")
-print(top_ten_tov)
+# Calculate the composite score as the average of the normalized statistics
+player_stats <- player_stats %>%
+  rowwise() %>%
+  mutate(composite_score = mean(c(norm_weighted_tov, norm_weighted_ast, norm_weighted_stl, norm_weighted_ft_pct, norm_weighted_blk), na.rm = TRUE)) %>%
+  ungroup()
 
-cat("\nTop 10 Players for Assists (AST):\n")
-print(top_ten_ast)
+# Select the top 20 players based on the composite score
+top_20_players <- player_stats %>%
+  arrange(desc(composite_score)) %>%
+  slice_head(n = 20)
 
-cat("\nTop 10 Players for Steals (STL):\n")
-print(top_ten_stl)
+# Select relevant columns to display
+top_20_players <- top_20_players %>%
+  select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
 
-cat("\nTop 10 Players for Free Throw Percentage (FT_PCT):\n")
-print(top_ten_ft_pct)
-
-cat("\nTop 10 Players for Blocks (BLK):\n")
-print(top_ten_blk)
+# Print the top 20 players
+print(top_20_players)

@@ -156,6 +156,60 @@ shooting research may improve.
 
 ### Summary Information
 
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load the CSV data
+file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
+clutch_data <- read_csv(file_url)
+
+# Calculate weighted statistics based on minutes played
+clutch_data <- clutch_data %>%
+  mutate(weighted_tov = TOV * MIN / GP,
+         weighted_ast = AST * MIN / GP,
+         weighted_stl = STL * MIN / GP,
+         weighted_ft_pct = FT_PCT * MIN / GP,
+         weighted_blk = BLK * MIN / GP)
+
+# Filter data based on minimum minutes and games played
+clutch_data <- clutch_data %>%
+  filter(MIN >= 2, GP >= 15)
+
+# Group data by player and calculate total weighted statistics
+player_stats <- clutch_data %>%
+  group_by(PLAYER_NAME) %>%
+  summarise(total_weighted_tov = sum(weighted_tov, na.rm = TRUE),
+            total_weighted_ast = sum(weighted_ast, na.rm = TRUE),
+            total_weighted_stl = sum(weighted_stl, na.rm = TRUE),
+            avg_weighted_ft_pct = mean(weighted_ft_pct, na.rm = TRUE),
+            total_weighted_blk = sum(weighted_blk, na.rm = TRUE))
+
+# Normalize each statistic
+player_stats <- player_stats %>%
+  mutate(norm_weighted_tov = (total_weighted_tov - min(total_weighted_tov)) / (max(total_weighted_tov) - min(total_weighted_tov)),
+         norm_weighted_ast = (total_weighted_ast - min(total_weighted_ast)) / (max(total_weighted_ast) - min(total_weighted_ast)),
+         norm_weighted_stl = (total_weighted_stl - min(total_weighted_stl)) / (max(total_weighted_stl) - min(total_weighted_stl)),
+         norm_weighted_ft_pct = (avg_weighted_ft_pct - min(avg_weighted_ft_pct)) / (max(avg_weighted_ft_pct) - min(avg_weighted_ft_pct)),
+         norm_weighted_blk = (total_weighted_blk - min(total_weighted_blk)) / (max(total_weighted_blk) - min(total_weighted_blk)))
+
+# Calculate the composite score as the average of the normalized statistics
+player_stats <- player_stats %>%
+  rowwise() %>%
+  mutate(composite_score = mean(c(norm_weighted_tov, norm_weighted_ast, norm_weighted_stl, norm_weighted_ft_pct, norm_weighted_blk), na.rm = TRUE)) %>%
+  ungroup()
+
+# Select the top 20 players based on the composite score
+top_20_players <- player_stats %>%
+  arrange(desc(composite_score)) %>%
+  slice_head(n = 20)
+
+# Select relevant columns to display
+top_20_players <- top_20_players %>%
+  select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
+
+
 
 Our analysis of the clutch performance data from the 2020-21 NBA season
 offers valuable insights into player performance during critical moments of
@@ -189,71 +243,61 @@ pressure.
 
 
 ### Table
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
 
-PLAYER_NAME             total_weighted_tov
-<chr>                                <dbl>
-1 LeBron James                        0.148
-2 James Harden                        0.0891
-3 Kevin Durant                        0.0844
-4 Nikola Jokic                        0.0758
-5 Khris Middleton                     0.075
-6 Darius Garland                      0.0733
-7 Shai Gilgeous-Alexander             0.068
-8 Russell Westbrook                   0.0629
-9 Collin Sexton                       0.06  
-10 Joel Embiid                         0.0592
+# Load the CSV data
+file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
+clutch_data <- read_csv(file_url)
 
-PLAYER_NAME             total_weighted_ast
-<chr>                                <dbl>
-1 LeBron James                        0.198
-2 Jamal Murray                        0.158
-3 James Harden                        0.143
-4 Shai Gilgeous-Alexander             0.136
-5 Russell Westbrook                   0.126
-6 Nikola Jokic                        0.106
-7 Draymond Green                      0.106
-8 Trae Young                          0.0984
-9 Will Barton                         0.098
-10 Gordon Hayward                      0.093
+# Calculate weighted statistics based on minutes played
+clutch_data <- clutch_data %>%
+  mutate(weighted_tov = TOV * MIN / GP,
+         weighted_ast = AST * MIN / GP,
+         weighted_stl = STL * MIN / GP,
+         weighted_ft_pct = FT_PCT * MIN / GP,
+         weighted_blk = BLK * MIN / GP)
 
-PLAYER_NAME       total_weighted_stl
-<chr>                          <dbl>
-1 Collin Sexton                 0.06  
-2 LeBron James                  0.0495
-3 Will Barton                   0.049
-4 Nikola Jokic                  0.0455
-5 Reggie Bullock                0.045
-6 LaMelo Ball                   0.04  
-7 Julius Randle                 0.0386
-8 Bogdan Bogdanovic             0.0379
-9 Andre Drummond                0.0368
-10 Draymond Green                0.0354
+# Filter data based on minimum minutes and games played
+clutch_data <- clutch_data %>%
+  filter(MIN >= 2, GP >= 15)
 
-PLAYER_NAME             avg_weighted_ft_pct
-<chr>                                 <dbl>
-1 Jamal Murray                          0.263
-2 Will Barton                           0.245
-3 Derrick White                         0.224
-4 Anthony Davis                         0.211
-5 Goran Dragic                          0.193
-6 Bogdan Bogdanovic                     0.189
-7 Kevin Durant                          0.182
-8 Shai Gilgeous-Alexander               0.181
-9 James Harden                          0.169
-10 Christian Wood                        0.167
+# Group data by player and calculate total weighted statistics
+player_stats <- clutch_data %>%
+  group_by(PLAYER_NAME) %>%
+  summarise(total_weighted_tov = sum(weighted_tov, na.rm = TRUE),
+            total_weighted_ast = sum(weighted_ast, na.rm = TRUE),
+            total_weighted_stl = sum(weighted_stl, na.rm = TRUE),
+            avg_weighted_ft_pct = mean(weighted_ft_pct, na.rm = TRUE),
+            total_weighted_blk = sum(weighted_blk, na.rm = TRUE))
 
-PLAYER_NAME         total_weighted_blk
-<chr>                            <dbl>
-1 Anthony Davis                   0.0844
-2 Joel Embiid                     0.0592
-3 Robert Williams III             0.0588
-4 Nerlens Noel                    0.0553
-5 Will Barton                     0.049
-6 Kevin Durant                    0.0422
-7 Myles Turner                    0.0375
-8 Andre Drummond                  0.0368
-9 Bam Adebayo                     0.0362
-10 Deandre Ayton                   0.0343
+# Normalize each statistic
+player_stats <- player_stats %>%
+  mutate(norm_weighted_tov = (total_weighted_tov - min(total_weighted_tov)) / (max(total_weighted_tov) - min(total_weighted_tov)),
+         norm_weighted_ast = (total_weighted_ast - min(total_weighted_ast)) / (max(total_weighted_ast) - min(total_weighted_ast)),
+         norm_weighted_stl = (total_weighted_stl - min(total_weighted_stl)) / (max(total_weighted_stl) - min(total_weighted_stl)),
+         norm_weighted_ft_pct = (avg_weighted_ft_pct - min(avg_weighted_ft_pct)) / (max(avg_weighted_ft_pct) - min(avg_weighted_ft_pct)),
+         norm_weighted_blk = (total_weighted_blk - min(total_weighted_blk)) / (max(total_weighted_blk) - min(total_weighted_blk)))
+
+# Calculate the composite score as the average of the normalized statistics
+player_stats <- player_stats %>%
+  rowwise() %>%
+  mutate(composite_score = mean(c(norm_weighted_tov, norm_weighted_ast, norm_weighted_stl, norm_weighted_ft_pct, norm_weighted_blk), na.rm = TRUE)) %>%
+  ungroup()
+
+# Select the top 20 players based on the composite score
+top_20_players <- player_stats %>%
+  arrange(desc(composite_score)) %>%
+  slice_head(n = 20)
+
+# Select relevant columns to display
+top_20_players <- top_20_players %>%
+  select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
+
+# Print the top 20 players
+print(top_20_players)
 
 This detailed analysis identifies the most impactful players in clutch
 situations, offering valuable insights into their performance under pressure.
@@ -262,7 +306,7 @@ excel in critical moments and which areas require improvement.
 
 ### Chart 1
 
-```r
+```{r, echo = FALSE, message = FALSE}
 # Load necessary libraries
 library(ggplot2)
 library(dplyr)
@@ -311,7 +355,7 @@ each team.
 
 ### Chart 2
 
-```r
+```{r, echo = FALSE, message = FALSE}
 # Load necessary libraries
 library(ggplot2)
 library(dplyr)

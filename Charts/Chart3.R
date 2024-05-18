@@ -27,3 +27,6 @@ ggplot(points_stats, aes(x = reorder(TEAM_ABBREVIATION, -avg_points), y = avg_po
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "none")
+
+ggsave(filename = "chart3.png", plot = p, width = 8, height = 6, dpi = 300)
+

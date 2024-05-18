@@ -30,3 +30,5 @@ ggplot(turnover_stats, aes(x = TEAM_ABBREVIATION, y = avg_weighted_tov, fill = T
        y = "Average Turnovers") +
   theme_minimal() +
   theme(legend.position = "none")
+
+ggsave(filename = "chart1.png", plot = p, width = 8, height = 6, dpi = 300)
