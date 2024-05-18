@@ -160,6 +160,7 @@ shooting research may improve.
 library(ggplot2)
 library(dplyr)
 library(readr)
+library(kableExtra)
 
 # Load the CSV data
 file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
@@ -167,47 +168,39 @@ clutch_data <- read_csv(file_url)
 
 # Calculate weighted statistics based on minutes played
 clutch_data <- clutch_data %>%
-  mutate(weighted_tov = TOV * MIN / GP,
-         weighted_ast = AST * MIN / GP,
-         weighted_stl = STL * MIN / GP,
-         weighted_ft_pct = FT_PCT * MIN / GP,
-         weighted_blk = BLK * MIN / GP)
+  mutate(weighted_turnovers = TOV * MIN / GP,
+         weighted_assists = AST * MIN / GP,
+         weighted_steals = STL * MIN / GP,
+         weighted_free_throw_pct = FT_PCT * MIN / GP,
+         weighted_blocks = BLK * MIN / GP)
 
 # Filter data based on minimum minutes and games played
-clutch_data <- clutch_data %>%
+clutch_data_filtered <- clutch_data %>%
   filter(MIN >= 2, GP >= 15)
 
 # Group data by player and calculate total weighted statistics
-player_stats <- clutch_data %>%
-  group_by(PLAYER_NAME) %>%
-  summarise(total_weighted_tov = sum(weighted_tov, na.rm = TRUE),
-            total_weighted_ast = sum(weighted_ast, na.rm = TRUE),
-            total_weighted_stl = sum(weighted_stl, na.rm = TRUE),
-            avg_weighted_ft_pct = mean(weighted_ft_pct, na.rm = TRUE),
-            total_weighted_blk = sum(weighted_blk, na.rm = TRUE))
-
-# Normalize each statistic
-player_stats <- player_stats %>%
-  mutate(norm_weighted_tov = (total_weighted_tov - min(total_weighted_tov)) / (max(total_weighted_tov) - min(total_weighted_tov)),
-         norm_weighted_ast = (total_weighted_ast - min(total_weighted_ast)) / (max(total_weighted_ast) - min(total_weighted_ast)),
-         norm_weighted_stl = (total_weighted_stl - min(total_weighted_stl)) / (max(total_weighted_stl) - min(total_weighted_stl)),
-         norm_weighted_ft_pct = (avg_weighted_ft_pct - min(avg_weighted_ft_pct)) / (max(avg_weighted_ft_pct) - min(avg_weighted_ft_pct)),
-         norm_weighted_blk = (total_weighted_blk - min(total_weighted_blk)) / (max(total_weighted_blk) - min(total_weighted_blk)))
+player_stats <- clutch_data_filtered %>%
+  group_by(Player = PLAYER_NAME) %>%
+  summarise(total_weighted_turnovers = sum(weighted_turnovers, na.rm = TRUE),
+            total_weighted_assists = sum(weighted_assists, na.rm = TRUE),
+            total_weighted_steals = sum(weighted_steals, na.rm = TRUE),
+            avg_weighted_free_throw_pct = mean(weighted_free_throw_pct, na.rm = TRUE),
+            total_weighted_blocks = sum(weighted_blocks, na.rm = TRUE))
 
 # Calculate the composite score as the average of the normalized statistics
 player_stats <- player_stats %>%
-  rowwise() %>%
-  mutate(composite_score = mean(c(norm_weighted_tov, norm_weighted_ast, norm_weighted_stl, norm_weighted_ft_pct, norm_weighted_blk), na.rm = TRUE)) %>%
-  ungroup()
-
-# Select the top 20 players based on the composite score
-top_20_players <- player_stats %>%
+  mutate(composite_score = rowMeans(select(., -Player), na.rm = TRUE)) %>%
   arrange(desc(composite_score)) %>%
-  slice_head(n = 20)
+  mutate_at(vars(starts_with("total"), ends_with("pct")), list(~round(., 2)))
 
 # Select relevant columns to display
-top_20_players <- top_20_players %>%
-  select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
+top_20_players <- player_stats %>%
+  slice_head(n = 20) %>%
+  select(Player, Total_Turnovers = total_weighted_turnovers, Total_Assists = total_weighted_assists,
+         Total_Steals = total_weighted_steals, Avg_Free_Throw_Pct = avg_weighted_free_throw_pct,
+         Total_Blocks = total_weighted_blocks, Composite_Score = composite_score)
+
+
 
 ```
 
@@ -249,6 +242,8 @@ pressure.
 library(ggplot2)
 library(dplyr)
 library(readr)
+library(knitr)
+library(kableExtra)
 
 # Load the CSV data
 file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
@@ -298,8 +293,17 @@ top_20_players <- player_stats %>%
 top_20_players <- top_20_players %>%
   select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
 
-# Print the top 20 players
-print(top_20_players)
+# Print the top 20 players as a styled table
+top_20_players %>%
+  kable(format = "html", table.attr = 'class="table table-striped"',
+        col.names = c("Player Name", "Weighted TOs", "Weighted ASTs", "Weighted STLs", "Weighted FT%", "Weighted BLKs", "Composite Score")) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  column_spec(7, bold = TRUE, color = "white", background = "dodgerblue") %>%
+  row_spec(0, bold = TRUE, background = "lightgray") %>%
+  add_header_above(c(" " = 1, "Player Stats" = 6)) %>%
+  footnote(general = "Data source: Inpredictable and Basketball Reference",
+           footnote_as_chunk = TRUE)
+```
 ```
 This detailed analysis identifies the most impactful players in clutch
 situations, offering valuable insights into their performance under pressure.
@@ -340,7 +344,8 @@ ggplot(turnover_stats, aes(x = TEAM_ABBREVIATION, y = avg_weighted_tov, fill = T
        x = "Team Abbreviation",
        y = "Average Turnovers") +
   theme_minimal() +
-  theme(legend.position = "none")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")
 ```
 
 I chose to generate a bar chart with error bars to illustrate the average

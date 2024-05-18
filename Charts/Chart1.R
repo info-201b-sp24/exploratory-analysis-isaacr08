@@ -29,6 +29,5 @@ ggplot(turnover_stats, aes(x = TEAM_ABBREVIATION, y = avg_weighted_tov, fill = T
        x = "Team Abbreviation",
        y = "Average Turnovers") +
   theme_minimal() +
-  theme(legend.position = "none")
-
-ggsave(filename = "chart1.png", plot = p, width = 8, height = 6, dpi = 300)
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")

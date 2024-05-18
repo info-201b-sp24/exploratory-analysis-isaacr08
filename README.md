@@ -1,6 +1,6 @@
 # Exploratory Analysis
 
-Link to your group's exploratory analysis here: https://info-201b-sp23.github.io/exploratory-analysis-starter/index.html   
+Link to your group's exploratory analysis here: file:///C:/Users/isaac/Documents/exploratory-analysis-isaacr08/index.html  
 (subsitute for your group's GitHub pages site)
 
 The purpose of this assignment is to provide you with the opportunity to explore your final project data and become familiar with collaborative coding techniques. By completing the assignment, you will demonstrate the following skills:
@@ -9,13 +9,13 @@ The purpose of this assignment is to provide you with the opportunity to explore
 - Using R Markdown to create a report on the web
 - Code and collaborate with others
 
-Make sure you choose one person to accept this assignment and then add your teammates as collaborators. 
+Make sure you choose one person to accept this assignment and then add your teammates as collaborators.
 
 ## Assignment structure
 
 For this assignment, your team will create an RMarkdown report about the datasets you have selected for your final project.
 
-Your report must include all of the elements from your Final Project Proposal, but the elements should be clarified, improved, and updated from your original submission based on conversations with your group and feedback from the teaching team. 
+Your report must include all of the elements from your Final Project Proposal, but the elements should be clarified, improved, and updated from your original submission based on conversations with your group and feedback from the teaching team.
 
 In addition, your report must include: 
 

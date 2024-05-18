@@ -2,6 +2,8 @@
 library(ggplot2)
 library(dplyr)
 library(readr)
+library(knitr)
+library(kableExtra)
 
 # Load the CSV data
 file_url <- "https://raw.githubusercontent.com/jai-agrawal/nba-player-clutch-stats/master/clutch_data.csv"
@@ -51,5 +53,14 @@ top_20_players <- player_stats %>%
 top_20_players <- top_20_players %>%
   select(PLAYER_NAME, total_weighted_tov, total_weighted_ast, total_weighted_stl, avg_weighted_ft_pct, total_weighted_blk, composite_score)
 
-# Print the top 20 players
-print(top_20_players)
+# Print the top 20 players as a styled table
+top_20_players %>%
+  kable(format = "html", table.attr = 'class="table table-striped"',
+        col.names = c("Player Name", "Weighted TOs", "Weighted ASTs", "Weighted STLs", "Weighted FT%", "Weighted BLKs", "Composite Score")) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  column_spec(7, bold = TRUE, color = "white", background = "dodgerblue") %>%
+  row_spec(0, bold = TRUE, background = "lightgray") %>%
+  add_header_above(c(" " = 1, "Player Stats" = 6)) %>%
+  footnote(general = "Data source: Inpredictable and Basketball Reference",
+           footnote_as_chunk = TRUE)
+```
